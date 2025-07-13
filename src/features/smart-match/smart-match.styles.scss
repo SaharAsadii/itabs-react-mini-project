@@ -1,0 +1,141 @@
+.smart-match-container {
+  padding: 24px 0px;
+  background: #f8fafc;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    sans-serif;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 32px;
+    gap: 24px;
+
+    .header-left {
+      flex: 1;
+
+      .smart-match {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 8px;
+
+        span {
+          font-weight: 600;
+          font-size: 16px;
+          color: #1f2937;
+        }
+      }
+
+      .description {
+        color: #64748b;
+        font-size: 14px;
+        margin: 0;
+      }
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+      .search-container {
+        position: relative;
+
+        .search-icon {
+          position: absolute;
+          left: 12px;
+          top: 50%;
+          transform: translateY(-50%);
+          color: #64748b;
+          z-index: 1;
+        }
+
+        .search-input {
+          padding-left: 40px;
+          width: 200px;
+        }
+      }
+
+      .filter-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+    }
+  }
+
+  .main-content {
+    background: #f5f7fa;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+
+      .grid-table {
+        display: grid;
+        grid-template-columns:
+          120px 120px
+          repeat(7, 140px)
+          repeat(6, 140px)
+          100px;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 0;
+      }
+
+      .header-level-1 {
+        font-weight: bold;
+        background: #f0f0f0;
+        .col-span-2 {
+          grid-column: span 2;
+        }
+        .col-span-7 {
+          grid-column: span 7;
+        }
+        .col-span-6 {
+          grid-column: span 6;
+        }
+        .col-span-1 {
+          grid-column: span 1;
+        }
+      }
+
+      .header-level-2 {
+        font-weight: bold;
+        background: #fafafa;
+        border-bottom: 2px solid #ddd;
+      }
+
+      .data-row {
+        background: #fff;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        margin-bottom: 6px;
+        padding: 4px 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .smart-match-container {
+    .header {
+      flex-direction: column;
+      align-items: stretch;
+
+      .header-right {
+        justify-content: flex-end;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .smart-match-container {
+    padding: 16px;
+  }
+}
