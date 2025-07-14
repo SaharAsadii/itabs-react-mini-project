@@ -31,6 +31,25 @@ $shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
 $shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 $shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 
+:root {
+  --primary-color: #{$primary-color};
+  --primary-dark: #{$primary-dark};
+  --secondary-color: #{$secondary-color};
+  --success-color: #{$success-color};
+  --warning-color: #{$warning-color};
+  --danger-color: #{$danger-color};
+  --white: #{$white};
+  --gray-50: #{$gray-50};
+  --gray-100: #{$gray-100};
+  --gray-200: #{$gray-200};
+  --gray-300: #{$gray-300};
+  --gray-400: #{$gray-400};
+  --gray-500: #{$gray-500};
+  --gray-600: #{$gray-600};
+  --gray-700: #{$gray-700};
+  --gray-800: #{$gray-800};
+  --gray-900: #{$gray-900};
+}
 
 * {
   margin: 0;
@@ -39,11 +58,10 @@ $shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family:Poppins, sans-serif;
   line-height: 1.6;
   color: $gray-800;
-  background-color: $light-bg;
+  background-color: $white;
 }
 
 
@@ -56,7 +74,7 @@ body {
 .app-header {
   background: $white;
   padding: $spacing-lg $spacing-xl;
-  border-bottom: 1px solid $gray-200;
+  border-bottom: 1px solid $gray-300;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -105,28 +123,14 @@ body {
     position: relative;
     box-shadow: none;
     border-radius: 8px 0px 0px 0px;
+    display: none;
   }
   box-shadow: 0px 14px 64px -4px #18274B1F;
 } 
 
 
 
-.empties-table,
-.exports-table {
-  background: $white;
-  border-radius: $border-radius-lg;
-  box-shadow: $shadow-md;
-  overflow: hidden;
 
-  h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: $gray-900;
-    padding: $spacing-lg $spacing-xl;
-    border-bottom: 1px solid $gray-200;
-    background: $gray-50;
-  }
-}
 
 
 

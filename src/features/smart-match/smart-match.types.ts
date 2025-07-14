@@ -76,6 +76,7 @@ export interface Export {
   bookings: Booking[];
   address: Address;
   cabin: Cabin;
+  savings?: Record<string, number>;
 }
 
 export interface ListData {
