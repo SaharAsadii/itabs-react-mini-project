@@ -1,16 +1,8 @@
-"use client";
-
-import * as React from "react";
+import { forwardRef } from "react";
 import "./switch.scss";
+import { SwitchProps } from "./switch.types";
 
-interface SwitchProps {
-  checked?: boolean;
-  onCheckedChange?: (checked: boolean) => void;
-  disabled?: boolean;
-  className?: string;
-}
-
-const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
+const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
   (
     {
       className = "",

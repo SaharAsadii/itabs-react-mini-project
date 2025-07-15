@@ -26,6 +26,7 @@
     "globals": "^16.3.0",
     "sass": "^1.89.2",
     "typescript": "^5.8.3",
-    "vite": "^7.0.4"
+    "vite": "^7.0.4",
+    "vite-tsconfig-paths": "^5.1.4"
   }
 }

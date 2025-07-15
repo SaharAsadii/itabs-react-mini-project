@@ -1,3 +1,6 @@
+@use 'sass:color';
+@use '@/styles/App.scss' as vars;
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -11,7 +14,7 @@
   outline: none;
 
   &:focus-visible {
-    outline: 2px solid #3b82f6;
+    outline: 2px solid vars.$primary-color;
     outline-offset: 2px;
   }
 
@@ -20,29 +23,29 @@
     opacity: 0.5;
   }
 
-  // Variants
+
   &--default {
-    background: #3b82f6;
-    color: white;
+    background: vars.$primary-color;
+    color: vars.$white;
     
     &:hover {
-      background: #2563eb;
+   background:color.adjust(vars.$success-color, $lightness: -10%);
     }
   }
 
   &--destructive {
-    background: #ef4444;
-    color: white;
+    background: vars.$danger-color;
+    color: vars.$white;
     
     &:hover {
-      background: #dc2626;
+      background: vars.$danger-color;
     }
   }
 
   &--outline {
     border: 1px solid #d1d5db;
     background: transparent;
-    color: #374151;
+    color: vars.$gray-600;
     
     &:hover {
       background: #f9fafb;
@@ -52,7 +55,7 @@
 
   &--secondary {
     background: #f3f4f6;
-    color: #374151;
+    color: vars.$gray-600;
     
     &:hover {
       background: #e5e7eb;
@@ -71,7 +74,7 @@
 
   &--link {
     background: transparent;
-    color: #3b82f6;
+    color: vars.$primary-color;
     text-decoration: underline;
     text-underline-offset: 4px;
     
@@ -80,7 +83,7 @@
     }
   }
 
-  // Sizes
+
   &--default {
     height: 40px;
     padding: 0 16px;

@@ -1,29 +1,102 @@
-# Smart Match Dashboard
+# ITabs React Mini Project
 
-A modern React-based dashboard application for managing container logistics and smart matching of empty containers with export bookings.
-
-## 🚀 Features
-
-- **Smart Match System**: Intelligent matching of empty containers with export bookings
-- **Container Management**: Track containers, chassis, and their status
-- **Export Tracking**: Monitor export bookings with appointments and deadlines
-- **Interactive Dashboard**: Toggle smart match functionality with real-time updates
-- **Data Visualization**: Clean grid-based layout for logistics data
-- **Modern UI**: Built with React, TypeScript, and SCSS
+A React-based dashboard application for managing container logistics and smart matching of empty containers with export bookings.
 
 ## 📁 Project Structure
 
 ```
-src/
-├── components/          # Reusable UI components
-│   ├── button/         # Custom button component
-│   └── switch/         # Toggle switch component
-├── features/           # Feature-specific modules
-│   └── smart-match/    # Smart match functionality
-├── services/           # API services and data fetching
-├── styles/             # Global styles and SCSS files
-└── utils/              # Utility functions (date formatting, etc.)
+itabs-react-mini-project/
+
+
+└── 📁 src/                          # Source code directory
+
+    ├── 📄 App.tsx                   # Root React component with header and SmartMatch feature
+    │
+    ├── 📁 styles/                   # Global styling files
+    │   └── 📄 App.scss              # Global application styles and CSS variables
+    │
+    ├── 📁 utils/                    # Utility functions and helpers
+    │   └── 📄 convert-date.ts       # Date formatting utility (MM/DD/YYYY format)
+    │
+    ├── 📁 services/                 # External API communication layer
+    │   └── 📄 api.ts                # Axios instance with base URL and Bearer token auth
+    │
+    ├── 📁 components/               # Reusable UI components library
+    │   ├── 📄 index.ts              # Export for all components
+    │   │
+    │   ├── 📁 button/               # Custom button component
+    │   │   ├── 📄 index.tsx         # Button component with variant prop support
+            ├── 📄 button.types.ts   # Button component types
+    │   │   └── 📄 button.scss       # Button-specific styling and variants
+    │   │
+    │   ├── 📁 switch/               # Toggle switch component
+    │   │   ├── 📄 index.tsx         # Switch component for enable/disable functionality
+            ├── 📄 switch.types.ts   # Switch component types
+    │   │   └── 📄 switch.scss       # Switch styling with animations and states
+    │   │
+    │   └── 📁 badge/                # Badge component for displaying values
+    │       ├── 📄 index.tsx         # Badge component for savings indicators
+            ├── 📄 badge.types.ts    # Badge component types
+    │       └── 📄 badge.scss        # Badge styling with color variations
+    │
+    └── 📁 features/                 # Feature-specific modules and business logic
+        ├── 📄 index.ts              # Export for all features
+        │
+        └── 📁 smart-match/          # Smart container matching feature
+            ├── 📄 index.tsx         # Main SmartMatch component with state management
+            ├── 📄 smart-match.types.ts        # TypeScript interfaces for:
+            │                                  #   - Container (empty container data)
+            │                                  #   - Export (export booking data)
+            │                                  #   - Address, Company, Specifications
+            │                                  #   - API response structures
+            ├── 📄 smart-match.constants.ts    # Constants for table headers and configuration
+            ├── 📄 smart-match.styles.scss     # Feature-specific styling for tables and layout
+            │
+            ├── 📁 components/       # Smart-match specific components
+            │   ├── 📄 index.ts      # Export for smart-match components
+            │   ├── 📄 data-row.tsx           # Individual row component for container data
+            │   ├── 📄 empties-table.tsx      # Table component for empty containers display
+            │   ├── 📄 exports-table.tsx      # Table component for export bookings display
+            │   ├── 📄 loading-state.tsx      # Loading and error state wrapper component
+            │   ├── 📄 smart-match-header.tsx # Header component with toggle and filters
+            │   └── 📄 table-headers.tsx      # Table headers component
+            │
+            ├── 📁 hooks/            # Custom React hooks for state management
+            │   ├── 📄 index.ts      # Export for custom hooks
+            │   ├── 📄 use-smart-match-data.ts    # Hook for data fetching and API calls
+            │   └── 📄 use-smart-match-state.ts   # Hook for component state management
+            │
+            └── 📁 utils/            # Business logic and utility functions
+                ├── 📄 index.ts      # Export for utility functions
+                └── 📄 smart-match-utils.ts       # Core logic for matching
 ```
+
+### 📝 File Descriptions
+
+#### **Root Configuration Files**
+
+- **`package.json`**: Defines project dependencies (React 19, TypeScript, Axios, Iconsax React), dev dependencies (Vite, ESLint, Sass), and npm scripts
+- **`vite.config.js`**: Configures Vite build tool with React plugin, TypeScript path resolution, and API proxy to `https://itabs.com.tr`
+- **`tsconfig.json`**: TypeScript configuration with strict mode, ESNext target, and path mapping for `@/*` aliases
+- **`eslint.config.js`**: ESLint setup for code quality with React hooks linting rules
+
+#### **Source Code Structure**
+
+- **`src/main.tsx`**: Application bootstrap file that renders the App component into the DOM root
+- **`src/App.tsx`**: Main application shell with header and SmartMatch dashboard integration
+
+#### **Components Architecture**
+
+- **Reusable UI Components**: Self-contained components with their own styling in separate folders
+- **Feature Components**: Business logic components specific to smart-match functionality
+- **Barrel Exports**: `index.ts` files provide clean import paths and encapsulation
+
+#### **Smart Match Feature**
+
+- **Types**: Comprehensive TypeScript interfaces for container logistics data structures
+- **Constants**: Configuration values and table headers for consistent UI rendering
+- **Styles**: SCSS styling specific to the smart matching dashboard layout
+- **Sub-components**: Specialized table components for different data types (empties vs exports)
 
 ## 🛠️ Tech Stack
 
@@ -46,7 +119,7 @@ Before running this project, make sure you have:
 1. **Clone the repository**
 
    ```bash
-   git clone <your-repository-url>
+   git clone https://github.com/SaharAsadii/itabs-react-mini-project.git
    cd itabs-react-mini-project
    ```
 
@@ -80,13 +153,6 @@ The application connects to a test API endpoint configured in `src/services/api.
 - **Authentication**: Bearer token authentication
 - **Primary Endpoint**: `/inhouse` for fetching container and export data
 
-## 📊 Data Flow
-
-1. **Container Data**: Fetches empty container inventory with location and availability
-2. **Export Data**: Retrieves export bookings with schedules and requirements
-3. **Smart Matching**: Algorithms suggest optimal container-booking pairs
-4. **Savings Calculation**: Displays potential cost savings from smart matches
-
 ## 🎨 UI Components
 
 ### SmartMatch Dashboard
@@ -102,6 +168,7 @@ The application connects to a test API endpoint configured in `src/services/api.
 
 - **Button**: Customizable button with variant support
 - **Switch**: Toggle component for enabling/disabling features
+- **Badge**: Show savings value
 
 ## 🔄 State Management
 
@@ -110,35 +177,6 @@ The application uses React's built-in state management:
 - `useState` for component-level state
 - `useEffect` for data fetching and side effects
 - Props drilling for simple data passing between components
-
-## 📝 Type Safety
-
-Fully typed with TypeScript interfaces including:
-
-- `Container`: Container specifications and status
-- `Booking`: Export booking details
-- `ApiResponse`: API response structure
-- `ListData`: Combined container and export data
-
-## 🎯 Future Enhancements
-
-- Real-time data updates with WebSocket integration
-- Advanced filtering and sorting capabilities
-- Export functionality for reports
-- Mobile-responsive design improvements
-- User authentication and role-based access
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is private and proprietary.
 
 ## 📞 Support
 

@@ -1,3 +1,5 @@
+@use '@/styles/App.scss' as vars;
+
 .switch {
   display: inline-flex;
   height: 24px;
@@ -12,12 +14,12 @@
   outline: none;
 
   &:focus-visible {
-    outline: 2px solid #3b82f6;
+    outline: 2px solid vars.$primary-color;
     outline-offset: 2px;
   }
 
   &--checked {
-    background: #3b82f6;
+    background: vars.$primary-color;
 
     .switch__thumb {
       transform: translateX(20px);
@@ -34,7 +36,7 @@
     height: 20px;
     width: 20px;
     border-radius: 10px;
-    background: white;
+    background: vars.$white;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
     transform: translateX(0);

@@ -1,22 +1,27 @@
-
 $primary-color: #2563eb;
-$primary-dark: #1d4ed8;
 $secondary-color: #64748b;
 $success-color: #10b981;
 $warning-color: #f59e0b;
 $danger-color: #ef4444;
 $light-bg: #f8fafc;
 $white: #ffffff;
-$gray-50: #f9fafb;
-$gray-100: #f1f5f9;
-$gray-200: #e2e8f0;
 $gray-300: #cbd5e1;
 $gray-400: #94a3b8;
-$gray-500: #64748b;
 $gray-600: #475569;
-$gray-700: #334155;
 $gray-800: #1e293b;
 $gray-900: #0f172a;
+$gray-600-alt: #374151;
+$gray-800-alt: #1f2937;
+$gray-400-alt: #999999;
+$border-gray: #e8e8e8;
+$bg-gray-light: #f5f7fa;
+$success-green: #32c778;
+$success-bg: #e0faec;
+$success-icon: #1fc16b;
+$warning-orange: #ffb414;
+$warning-bg: #ffefcc;
+$tooltip-text: #131517;
+$booking-text: #424346;
 
 $border-radius: 8px;
 $border-radius-lg: 12px;
@@ -27,28 +32,30 @@ $spacing-lg: 1.5rem;
 $spacing-xl: 2rem;
 $spacing-xxl: 3rem;
 
-$shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-$shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-$shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
 
 :root {
   --primary-color: #{$primary-color};
-  --primary-dark: #{$primary-dark};
   --secondary-color: #{$secondary-color};
   --success-color: #{$success-color};
   --warning-color: #{$warning-color};
   --danger-color: #{$danger-color};
   --white: #{$white};
-  --gray-50: #{$gray-50};
-  --gray-100: #{$gray-100};
-  --gray-200: #{$gray-200};
-  --gray-300: #{$gray-300};
   --gray-400: #{$gray-400};
-  --gray-500: #{$gray-500};
   --gray-600: #{$gray-600};
-  --gray-700: #{$gray-700};
   --gray-800: #{$gray-800};
-  --gray-900: #{$gray-900};
+  --gray-600-alt: #{$gray-600-alt};
+  --gray-800-alt: #{$gray-800-alt};
+  --gray-400-alt: #{$gray-400-alt};
+  --border-gray: #{$border-gray};
+  --bg-gray-light: #{$bg-gray-light};
+  --success-green: #{$success-green};
+  --success-bg: #{$success-bg};
+  --success-icon: #{$success-icon};
+  --warning-orange: #{$warning-orange};
+  --warning-bg: #{$warning-bg};
+  --tooltip-text: #{$tooltip-text};
+  --booking-text: #{$booking-text};
 }
 
 * {
@@ -78,7 +85,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: $shadow-sm;
+  box-shadow:  0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 
   h1 {
     font-size: 2rem;
@@ -112,12 +119,11 @@ body {
 .app-drawer {
   width: 179px;
   background: $white;
-  box-shadow: $shadow-md;
   border-radius: 8px 0px;
   padding: $spacing-lg;
   position: sticky;
   top: 0;
-
+  box-shadow: 0px 14px 64px -4px #18274B1F;
   @media (max-width: 768px) {
     width: 100%;
     position: relative;
@@ -125,14 +131,8 @@ body {
     border-radius: 8px 0px 0px 0px;
     display: none;
   }
-  box-shadow: 0px 14px 64px -4px #18274B1F;
+
 } 
-
-
-
-
-
-
 
 .loading,
 .error {
@@ -172,39 +172,4 @@ body {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
-}
-
-
-
-
-.text-center {
-  text-align: center;
-}
-
-.text-right {
-  text-align: right;
-}
-
-.mt-auto {
-  margin-top: auto;
-}
-
-.mb-0 {
-  margin-bottom: 0;
-}
-
-.hidden {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .hidden-mobile {
-    display: none;
-  }
-}
-
-@media (min-width: 769px) {
-  .hidden-desktop {
-    display: none;
-  }
 }

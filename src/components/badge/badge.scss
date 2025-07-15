@@ -1,11 +1,12 @@
-@import '../../styles/App.scss';
+@use 'sass:color';
+@use '@/styles/App.scss' as *;
 
 .badge {
   display: inline-flex;
   align-items: center;
   border-radius: 12px;
   border: 1px solid transparent;
-  padding: 2px 10px;
+  padding: 2px 4px;
   font-size: 11px;
   font-weight: 600;
   transition: all 0.2s;
@@ -19,11 +20,11 @@
 
   &--default {
     border: transparent;
-    background: #3b82f6;
-    color: white;
+    background: $primary-color;
+    color: $white;
 
     &:hover {
-      background: #2563eb;
+      background: $primary-color;
     }
   }
 
@@ -33,7 +34,8 @@
     color: $white;
 
     &:hover {
-      background: darken($success-color, 10%);
+      background:color.adjust($success-color, $lightness: -10%);
+      
     }
   }
 

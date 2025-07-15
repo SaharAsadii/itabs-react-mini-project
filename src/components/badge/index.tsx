@@ -1,12 +1,12 @@
-import type * as React from "react";
 import "./badge.scss";
 import { DiscountShape } from "iconsax-react";
+import { BadgeProps, BadgeVariant } from "./badge.types";
 
-export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: "default" | "matched" | "unmatched";
-}
-
-function Badge({ className = "", variant = "default", ...props }: BadgeProps) {
+function Badge({
+  className = "",
+  variant = BadgeVariant.DEFAULT,
+  ...props
+}: BadgeProps) {
   return (
     <div className={`badge badge--${variant} ${className}`.trim()} {...props}>
       <DiscountShape size={18} color="#fff" />
