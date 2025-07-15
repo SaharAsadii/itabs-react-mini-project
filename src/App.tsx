@@ -1,8 +1,6 @@
-import React from "react";
-import { SmartMatch } from "./features";
-import "./styles/App.scss";
+import { SmartMatch } from "@/features";
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <div className="app">
       <header className="app-header">

@@ -1,17 +1,6 @@
 import * as React from "react";
 import "./button.scss";
-
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?:
-    | "default"
-    | "destructive"
-    | "outline"
-    | "secondary"
-    | "ghost"
-    | "link";
-  size?: "default" | "sm" | "lg" | "icon";
-}
+import { ButtonProps } from "./button.types";
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (

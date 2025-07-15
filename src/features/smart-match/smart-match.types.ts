@@ -1,4 +1,5 @@
 export interface Container {
+  empty: any;
   id: number;
   name: string;
   chases: string;
@@ -9,6 +10,8 @@ export interface Container {
   status_message?: string;
   last_free_day?: string;
   gated_out?: string;
+  gated_in?: string;
+  est_per_diem?: string;
   return_terminals: string;
   savings?: Record<string, string>;
 }
@@ -41,7 +44,7 @@ export interface Cabin {
   specifications: Specifications;
 }
 
-export interface EmptyInventory {
+export interface Empty {
   id: number;
   cabin_id: number;
   address_id: number;
@@ -55,6 +58,7 @@ export interface EmptyInventory {
 }
 
 export interface Booking {
+  exportItem: any;
   id: number;
   name: string;
   export_id: number;
@@ -65,6 +69,8 @@ export interface Booking {
   appointment?: string;
   load_pickup_date?: string;
   vessel_departure?: string;
+  erd?: string;
+  pick_up_location?: string;
 }
 
 export interface Export {
@@ -83,7 +89,7 @@ export interface ListData {
   cabin: Cabin;
   size_type: string;
   company_name: string;
-  empties: EmptyInventory[];
+  empties: Empty[];
   exports: Export[];
   containers_count: number;
   exports_count: number;
@@ -94,4 +100,24 @@ export interface ApiResponse {
   data: {
     list: Record<string, ListData>;
   };
+}
+
+export interface BaseTableProps {
+  allContainers: Container[];
+  allBookings: Booking[];
+  smartMatchEnabled: boolean;
+  selectedMatchId: string | null;
+  isMatched: (container: Container, booking: Booking) => boolean;
+  getMatchId: (container: Container, booking: Booking) => string | null;
+  handleItemClick: (e: React.MouseEvent, itemId: string | null) => void;
+}
+
+export type EmptiesTableProps = BaseTableProps;
+
+export interface ExportsTableProps extends BaseTableProps {
+  getSavings: (
+    container: Container,
+    booking: Booking,
+    exportItem: Export
+  ) => number | string;
 }

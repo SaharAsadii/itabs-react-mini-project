@@ -1,10 +1,26 @@
+@use "@/styles/App.scss" as vars;
+
 .smart-match-container {
-  padding: 24px 0;
-  padding-right: 14px;
-  min-height: 100vh;
   flex: 1;
   width: 100%;
+  min-height: 100vh;
   max-width: calc(100vw - 179px - 48px);
+  padding: 24px 0 24px 0;
+  padding-right: 14px;
+
+  .loading,
+  .error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    font-size: 1rem;
+    color: vars.$gray-600-alt;
+  }
+
+  .error {
+    color: vars.$danger-color;
+  }
 
   .header {
     display: flex;
@@ -18,19 +34,18 @@
 
       .smart-match {
         display: flex;
-
         gap: 12px;
         margin-bottom: 8px;
 
         span {
           font-weight: 600;
           font-size: 16px;
-          color: #1f2937;
+          color: vars.$gray-800-alt;
         }
       }
 
       .description {
-        color: #64748b;
+        color: vars.$secondary-color;
         font-size: 14px;
         margin: 0;
       }
@@ -38,30 +53,10 @@
 
     .header-right {
       display: flex;
-
       gap: 16px;
-
-      .search-container {
-        position: relative;
-
-        .search-icon {
-          position: absolute;
-          left: 12px;
-          top: 50%;
-          transform: translateY(-50%);
-          color: #64748b;
-          z-index: 1;
-        }
-
-        .search-input {
-          padding-left: 40px;
-          width: 200px;
-        }
-      }
 
       .filter-btn {
         display: flex;
-
         gap: 8px;
       }
     }
@@ -69,25 +64,39 @@
 
   .table-wrapper {
     max-width: 100%;
-    overflow-x: auto;
-   
     border-radius: 12px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-background: #f5f7fa;
+    background: vars.$bg-gray-light;
+    position: relative;
+
+    .table-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: vars.$bg-gray-light;
+    }
+
+    .table-content {
+      overflow-x: auto;
+      max-height: calc(100vh - 200px);
+      overflow-y: auto;
+    }
+
     .grid-table {
       display: grid;
       grid-template-columns:
-        minmax(26px, 1fr) minmax(75px, 1fr)
+        minmax(26px, 1fr)
+        minmax(75px, 1fr)
         minmax(60px, 1fr)
-        repeat(6, minmax(80px, 1fr)) minmax(14px, 1fr) repeat(
-          6,
-          minmax(80px, 1fr)
-        )
-        minmax(14px, 1fr);
+        repeat(6, minmax(80px, 1fr))
+        minmax(14px, 1fr)
+        repeat(6, minmax(80px, 1fr))
+        minmax(70px, 1fr);
+
       align-items: stretch;
       gap: 8px;
-      min-width: 100%;
     }
+
     .grid-table-row {
       display: grid;
       position: relative;
@@ -98,60 +107,84 @@ background: #f5f7fa;
     }
 
     .table-inner-row {
+      position: relative;
       width: 100%;
-      background: #ffffff;
-      border: 1px solid #e8e8e8;
+      background: vars.$white;
+      border: 1px solid vars.$border-gray;
       border-radius: 4px;
       padding: 0px 8px;
       height: 40px;
       font-size: 9px;
       margin-bottom: 8px;
-      color: #374151;
+      color: vars.$gray-600-alt;
       text-align: center;
       transition: all 0.2s ease;
       cursor: pointer;
       align-items: center;
       justify-content: space-around;
-      &.empty {
-        background: #f3f4f6;
-        color: #9ca3af;
-        font-style: italic;
-        cursor: default;
-      }
+      z-index: 1;
 
       &:hover {
         transform: translateY(-1px);
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        z-index: 10;
       }
 
-   
-   
-         &.matched {
+      &.matched {
         font-weight: 600;
-         background: #e0faec;
-          border-color: #32c778;
-          border-style: dashed;
-         }
-      &.unmatched {
-        border-color: #ffb414;
+        background: vars.$success-bg;
+        border-color: vars.$success-green;
         border-style: dashed;
-        background-color: #ffefcc;
       }
 
-      &.booking-item {
-        background: rgba(59, 130, 246, 0.08);
-        border-color: rgba(59, 130, 246, 0.25);
-        color: #1e40af;
+      &.unmatched {
+        border-color: vars.$warning-orange;
+        border-style: dashed;
+        background-color: vars.$warning-bg;
+      }
 
-        &.matched {
-          background: rgba(59, 130, 246, 0.15);
-          border-color: #3b82f6;
+      &.tooltip-container {
+        .tooltip {
+          position: absolute;
+          bottom: calc(100% + 8px);
+          left: 50%;
+          transform: translateX(-50%);
+          background: vars.$white;
+          color: vars.$tooltip-text;
+          box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+          padding: 8px 12px;
+          border-radius: 6px;
+          font-size: 12px;
+          white-space: nowrap;
+          z-index: 1001;
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 0.2s ease, visibility 0.2s ease;
+          pointer-events: none;
+          max-width: 250px;
+          word-wrap: break-word;
+          white-space: normal;
+
+          &::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            border-top-color: vars.$white;
+          }
+        }
+
+        &:hover .tooltip {
+          opacity: 1;
+          visibility: visible;
         }
       }
     }
 
     .match-icon {
-      background-color: #1fc16b;
+      background-color: vars.$success-icon;
       position: absolute;
       height: 40px;
       width: 28px;
@@ -160,196 +193,112 @@ background: #f5f7fa;
       align-items: center;
       right: -28px;
       z-index: 1;
-      &.unmatched{
-        background-color: #ffb414;
+
+      &.unmatched {
+        background-color: vars.$warning-orange;
       }
     }
+
     .header-level-1 {
-      border: 1px solid #e8e8e8;
+      border: 1px solid vars.$border-gray;
       font-weight: bold;
-background-color:#fff;
+      background-color: vars.$white;
+      position: sticky;
+      top: 0;
+      z-index: 99;
+
       .col-span-2 {
         grid-column: span 3;
         padding: 12px 8px;
         display: flex;
-
         gap: 4px;
-        border-right: 1px solid #e8e8e8;
-        .booking-row {
-          border-right: 1px solid #e8e8e8;
-          color: #424346;
-          font-size: 10px;
-          font-weight: 500;
-        }
+        border-right: 1px solid vars.$border-gray;
       }
+
       .col-span-7 {
         grid-column: span 7;
         padding: 14px 8px;
         display: flex;
-
         gap: 4px;
-        border-right: 1px solid #e8e8e8;
-        .booking-row {
-          border-right: 1px solid #e8e8e8;
-          color: #424346;
-          font-size: 10px;
-          font-weight: 500;
+        border-right: 1px solid vars.$border-gray;
+
+        &:last-child {
+          border-right: none;
         }
-      }
-      .col-span-7:last-child {
-        grid-column: span 7;
-        padding: 14px 8px;
-        display: flex;
-
-        gap: 4px;
       }
     }
 
     .header-level-2 {
-      background: #ffffff;
+      background: vars.$white;
       padding: 9px 8px;
       font-size: 12px;
-      color: #999999;
+      color: vars.$gray-400-alt;
+      position: sticky;
+      top: 52px;
+      z-index: 98;
+
       div {
-        border-right: 1px solid #e8e8e8;
+        border-right: 1px solid vars.$border-gray;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-      }
-      div:last-child {
-        border-right: none;
+
+        &:last-child {
+          border-right: none;
+        }
       }
     }
 
     .data-row {
-      
-      border: 2px solid #FFFFFF;
+      border: 2px solid vars.$white;
       margin-bottom: 1rem;
       border-radius: 8px;
+
       .col-span-2 {
         grid-column: span 3;
         padding: 12px 8px;
         display: flex;
-
         gap: 4px;
 
         .booking-value {
           height: fit-content;
-          border-right: 1px solid #e8e8e8;
-          color: #424346;
+          border-right: 1px solid vars.$border-gray;
+          color: vars.$booking-text;
           font-size: 10px;
           font-weight: 500;
           width: 100%;
         }
       }
+
       .col-span-7 {
         grid-column: span 7;
         padding: 14px 8px;
         display: flex;
-
         gap: 4px;
 
         .booking-value {
-          border-right: 1px solid #e8e8e8;
-          color: #424346;
+          border-right: 1px solid vars.$border-gray;
+          color: vars.$booking-text;
           font-size: 10px;
           font-weight: 500;
         }
       }
-      .col-span-7:last-child {
-        grid-column: span 7;
-        padding: 14px 8px;
-        display: flex;
-
-        gap: 4px;
-      }
     }
   }
 
-  .tooltip-container {
-    position: relative;
+  .data-row-wrapper {
+    padding: 0.5rem 1rem;
+  }
 
-    .tooltip {
-      position: absolute;
-      bottom: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #fff;
-      color: #131517;
-      box-shadow: 0px 4px 8px 0px #00000033;
-
-      padding: 8px 12px;
-      border-radius: 6px;
-      font-size: 12px;
-      white-space: nowrap;
-      z-index: 1000;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.2s, visibility 0.2s;
-      pointer-events: none;
-      margin-bottom: 8px;
-
-      &::after {
-        content: "";
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        transform: translateX(-50%);
-        border: 5px solid transparent;
-        border-top-color: #fff;
-      }
-    }
-
-    &:hover .tooltip {
-      opacity: 1;
-      visibility: visible;
-    }
+  .column-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1440px) {
   .smart-match-container {
-    max-width: calc(100vw - 179px - 32px);
-
-    .header {
-      flex-direction: column;
-      align-items: stretch;
-
-      .header-right {
-        justify-content: flex-end;
-      }
-    }
-
-    .main-content .table-wrapper .grid-table {
-      grid-template-columns:
-        minmax(70px, 0.8fr) minmax(80px, 0.8fr)
-        repeat(7, minmax(80px, 0.9fr))
-        repeat(7, minmax(80px, 0.9fr));
-      gap: 4px;
-    }
-  }
-}
-
-@media (max-width: 768px) {
-  .smart-match-container {
-    padding: 16px;
-    max-width: 100vw;
-
-    .main-content .table-wrapper {
-      .grid-table {
-        grid-template-columns: repeat(16, minmax(120px, 1fr));
-        gap: 2px;
-        font-size: 10px;
-      }
-
-      .header-level-1,
-      .header-level-2,
-      .data-row {
-        div {
-          padding: 8px 4px;
-          word-break: break-word;
-        }
-      }
-    }
+    max-width: 100%;
   }
 }
